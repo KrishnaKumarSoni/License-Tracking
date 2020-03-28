@@ -4,6 +4,10 @@ Reading the number plate from a car image involves 2 steps:
 1. Locating where in the image is the plate located
 2. Using Optical Character Recognition to read the characters on the plate.
 
+## Web Application:
+![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/pg1.png "Landing Page")
+![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/pg2.png "Output Page")
+
 ## Steps to try this project on your system
 1. Clone this repository on your system.
 2. Create a virtual env using following command:
