@@ -22,6 +22,7 @@ pip install -r requirements.txt
 ```
 https://drive.google.com/file/d/1-4pKeB6KERPMJEsjNYdGc1ErLSS1B-a_/view?usp=sharing
 ```
+Make sure that the downloaded file is in the same folder as app.py
 
 4. Once this is done, you can run the application by running the command: 
 ```
