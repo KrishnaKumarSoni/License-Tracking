@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ```
 5. While this is being done, go to the following link and download the trained model:
 ```
-
+https://drive.google.com/file/d/1-4pKeB6KERPMJEsjNYdGc1ErLSS1B-a_/view?usp=sharing
 ```
 
 4. Once this is done, you can run the application by running the command: 
@@ -35,5 +35,5 @@ The data required for this model was taken from: https://www.kaggle.com/dataturk
 After processing the data, we get 237 car images along with the bounding boxes for license plate. 
 
 ## How this works?
-A CNN model based upon VGG16 architecture is used to train a model using the dataset mentioned above. Once this was done, the model was saved in a .hd5 file. 
-This model is used to maked the predictions for bounding boxes 
+A CNN model based upon VGG16 architecture is used to train a model using the dataset mentioned above. Once this was done, the model was saved in a .hd5 file. This model is used to maked the predictions for bounding boxes of the license plate on that image. 
+
