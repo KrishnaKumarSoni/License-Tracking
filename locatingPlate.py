@@ -7,6 +7,13 @@ Original file is located at
     https://colab.research.google.com/drive/14a4WT-0Jjdetsqvhpodd_gu7vJbUUMQJ
 """
 
+#This file is used to train a model to predict the bounding box 
+#of license plate in the image provided.
+
+#Mounting my google drive where the training data was stored.
+#after these 2 commands, the system prompts you to put a string which acts as a OTP
+#once this is done, your google drive is signed in
+
 from google.colab import drive
 drive.mount('/content/drive')
 
@@ -17,7 +24,6 @@ import numpy as np
 import cv2
 import glob
 import os
-import time
 from PIL import Image
 
 from keras.applications.vgg16 import VGG16
@@ -26,22 +32,21 @@ from keras.models import Model, Sequential, load_model
 from keras.preprocessing.image import ImageDataGenerator
 from keras.optimizers import Adam
 
-df = pd.read_csv('/content/drive/My Drive/License Plate/indian_license_plates.csv')
-
-df.head()
-
+#Reading the csv file containing image information
 df = pd.read_csv('/content/drive/My Drive/License Plate/indian_license_plates.csv')
 df["image_name"] = df["image_name"] + ".jpeg"
 df.drop(["image_width", "image_height"], axis=1, inplace=True)
 df.head()
 
-lucky_test_samples = np.random.randint(0, len(df), 5)
-reduced_df = df.drop(lucky_test_samples, axis=0)
+#keeping aside 5 images for testing at a later point.
+test_images = np.random.randint(0, len(df), 5)
+reduced_df = df.drop(test_images, axis=0)
 
 WIDTH = 224
 HEIGHT = 224
 CHANNEL = 3
 
+#Function to show the images with bounding box for license plate 
 def show_img(index):
     image = cv2.imread("/content/drive/My Drive/License Plate/Indian Number Plates/" + df["image_name"].iloc[index])
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -55,8 +60,6 @@ def show_img(index):
     image = cv2.rectangle(image, (tx, ty), (bx, by), (0, 0, 255), 1)
     plt.imshow(image)
     plt.show()
-
-show_img(5)
 
 datagen = ImageDataGenerator(rescale=1./255, validation_split=0.1)
 
@@ -80,6 +83,7 @@ validation_generator = datagen.flow_from_dataframe(
     class_mode="other",
     subset="validation")
 
+#CNN model
 model = Sequential()
 model.add(VGG16(weights="imagenet", include_top=False, input_shape=(HEIGHT, WIDTH, CHANNEL)))
 model.add(Flatten())
@@ -120,7 +124,8 @@ plt.show()
 
 model.evaluate_generator(validation_generator, steps=STEP_SIZE_VAL)
 
-for idx, row in df.iloc[lucky_test_samples].iterrows():    
+#testing the model on a few images.
+for idx, row in df.iloc[test_images].iterrows():    
     img = cv2.resize(cv2.imread("/content/drive/My Drive/License Plate/Indian Number Plates/" + row[0]) / 255.0, dsize=(WIDTH, HEIGHT))
     y_hat = model.predict(img.reshape(1, WIDTH, HEIGHT, 3)).reshape(-1) * WIDTH
     
@@ -131,32 +136,10 @@ for idx, row in df.iloc[lucky_test_samples].iterrows():
     image = cv2.rectangle(img, (xt, yt), (xb, yb), (0, 0, 255), 1)
     plt.imshow(image)
     plt.show()
-
-img = cv2.resize(cv2.imread("/content/drive/My Drive/License Plate/Indian Number Plates/licensed_car10.jpeg") / 255.0, dsize=(WIDTH, HEIGHT))
-y_hat = model.predict(img.reshape(1, WIDTH, HEIGHT, 3)).reshape(-1) * WIDTH
-
-xt, yt = y_hat[0], y_hat[1]
-xb, yb = y_hat[2], y_hat[3]
-
-img = cv2.cvtColor(img.astype(np.float32), cv2.COLOR_BGR2RGB)
-image = cv2.rectangle(img, (xt, yt), (xb, yb), (0, 0, 255), 1)
-plt.imshow(image)
-plt.show()
-
+    
+#saving the model in a .hd5 file
 model.save('/content/drive/My Drive/License Plate/License Plate Locator.hd5')
 
-new_model = load_model('/content/drive/My Drive/License Plate/License Plate Locator.hd5')
-
-img = cv2.resize(cv2.imread("/content/drive/My Drive/License Plate/Indian Number Plates/licensed_car185.jpeg") / 255.0, dsize=(WIDTH, HEIGHT))
-y_hat = new_model.predict(img.reshape(1, WIDTH, HEIGHT, 3)).reshape(-1) * WIDTH
-
-xt, yt = y_hat[0], y_hat[1]
-xb, yb = y_hat[2], y_hat[3]
-
-img = cv2.cvtColor(img.astype(np.float32), cv2.COLOR_BGR2RGB)
-image = cv2.rectangle(img, (xt, yt), (xb, yb), (0, 0, 255), 1)
-plt.imshow(image)
-plt.show()
 
 
 
