@@ -8,7 +8,7 @@ Reading the number plate from a car image involves 2 steps:
 ![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/webpage-1.png "Landing Page")
 ![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/webpage-2.png "Output Page")
 
-## Steps to try this project on your system
+## Steps to try this project on your system (for windows)
 1. Clone this repository on your system.
 2. Create a virtual env using following command:
 
