@@ -13,7 +13,7 @@ def locatePlate(filename):
     WIDTH = 224
     HEIGHT = 224
 
-    new_model = load_model('License Plate Locator.hd5')
+    new_model = load_model('License_Plate_Locator.hd5')
     img = cv2.resize(cv2.imread("static/images/"+filename) / 255.0, dsize=(WIDTH, HEIGHT))
     y_hat = new_model.predict(img.reshape(1, WIDTH, HEIGHT, 3)).reshape(-1) * WIDTH
 
