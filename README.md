@@ -5,8 +5,8 @@ Reading the number plate from a car image involves 2 steps:
 2. Using Optical Character Recognition to read the characters on the plate.
 
 ## Web Application:
-![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/webpage-1.png "Landing Page")
-![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/webpage-2.png "Output Page")
+![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/screenshot-1.png "Landing Page")
+![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/screenshot-3.png "Output Page")
 
 ## Steps to try this project on your system (for windows)
 A: Either you can go to the website: http://secondkks.pythonanywhere.com/
@@ -26,7 +26,7 @@ This creates a virtual environment and activates it for you to work in.
 ```
 pip install -r requirements.txt
 ```
-5. While this is being done, go to the following link and download the trained model:
+5. While this is being done, go to the following link and download the trained model (IF FOR SOME REASON YOU DO NOT FIND IT IN THE FILE EXPLORER):
 ```
 https://drive.google.com/file/d/1-4pKeB6KERPMJEsjNYdGc1ErLSS1B-a_/view?usp=sharing
 ```
