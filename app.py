@@ -31,9 +31,10 @@ def upload():
         f.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(f.filename)))
 
         #model prediction
-        locatePlate(f.filename)
-        res_img="../static/images/o_"+f.filename
-        text_out='PLATE NUMBER'
+        # saves the prediction and also gives the text output as a string 
+        textToPrint = locatePlate(f.filename)
+        res_img="static/images/o_"+f.filename
+        text_out= textToPrint
         return render_template('result.html', img_name=res_img, text_name=text_out)
     return render_template('index.html')
 
