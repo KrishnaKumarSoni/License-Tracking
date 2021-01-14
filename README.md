@@ -9,10 +9,6 @@ Reading the number plate from a car image involves 2 steps:
 ![alt text](https://github.com/KrishnaKumarSoni/License-Tracking/blob/master/static/images/screenshot-3.png "Output Page")
 
 ## Steps to try this project on your system (for windows)
-A: Either you can go to the website: http://secondkks.pythonanywhere.com/
-<br>
-B: Or, try the following steps:
-
 1. Clone this repository on your system.
 2. Create a virtual env using following command:
 
